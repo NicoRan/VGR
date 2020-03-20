@@ -15,6 +15,7 @@ using VGR.Data.Context;
 using VGR.Models;
 using VGR.Services.Services;
 using VGR.Services.Contracts;
+using Rotativa.AspNetCore;
 
 namespace VGR.Web
 {
@@ -38,6 +39,7 @@ namespace VGR.Web
                 //(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<VGRDbContext>();
 
+
             services.AddScoped<IPowerUserService, PowerUserService>();
             services.AddScoped<IReviewService, ReviewService>();
             services.AddScoped<ICommentService, CommentService>();
@@ -45,10 +47,11 @@ namespace VGR.Web
 
             services.AddControllersWithViews();
             services.AddRazorPages();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Microsoft.AspNetCore.Hosting.IHostingEnvironment envSecond)
         {
             if (env.IsDevelopment())
             {
@@ -76,6 +79,9 @@ namespace VGR.Web
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            RotativaConfiguration.Setup(envSecond);
+
         }
     }
 }

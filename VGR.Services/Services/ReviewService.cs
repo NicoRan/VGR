@@ -28,7 +28,9 @@ namespace VGR.Services.Services
         public async Task<Review> CreateReviewAsync(Guid powerUserId, string reviewText, string gameName, string gamePublisher, string releaseYear, string videoReview)
         {
             var powerUser = await _powerUserService.FindUserAsync(powerUserId);
+            var videoId = videoReview.Substring(Math.Max(0, videoReview.Length - 11));
 
+            string youtubeAddress = "https://www.youtube.com/embed/" + videoId;
             var review = new Review
             {
                 PowerUser = powerUser,
@@ -36,7 +38,7 @@ namespace VGR.Services.Services
                 GameName = gameName,
                 GamePublisher = gamePublisher,
                 ReleaseYear = releaseYear,
-                VideoReview = videoReview,
+                VideoReview = youtubeAddress,
                 //CreatedOn = DateTime.UtcNow
             };
 

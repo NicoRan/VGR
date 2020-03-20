@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Rotativa;
+using Rotativa.AspNetCore;
 using VGR.Data.Context;
 using VGR.Models;
 using VGR.Services.Contracts;
@@ -23,6 +25,38 @@ namespace VGR.Web.Controllers
             _commentService = commentService;
         }
 
+
+        public async Task<ViewAsPdf> PrintPDF(Guid id)
+        {
+            //empEntities context = new empEntities();
+            //List<emp_table> Data = context.emp_table.ToList();
+
+            //var list = await _context.Comments.Where(c => c.ReviewId == Guid.Parse("63b64f24-3b08-4b38-aa68-08d7cc0c9ffe")).ToListAsync();
+
+            var list = await _commentService.GetCommentsByReviewId(id);
+
+            var VMList = new List<CommentViewModel>();
+            foreach (var comment in list)
+            {
+                var newCommentViewModel = new CommentViewModel
+                {
+                    Id = comment.Id,
+                    EmailAddress = comment.EmailAddress,
+                    CommentText = comment.CommentText,
+                    UserName = comment.UserName,
+                    CreatedOn = comment.CreatedOn,
+                    ReviewId = comment.ReviewId
+                };
+                VMList.Add(newCommentViewModel);
+            }
+            //List<Comment> data = _context.Comments.ToList();
+            return new ViewAsPdf("PrintPDF", VMList)
+            {
+
+                FileName = "ExportComments.pdf"
+            };
+
+        }
         // GET: Comments
         public async Task<IActionResult> Index()
         {
@@ -61,15 +95,10 @@ namespace VGR.Web.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateCommentViewModel  createCommentViewModel)
         {
-            var stop = 0;
-            //if (ModelState.IsValid)
-            //{
-            //    comment.Id = Guid.NewGuid();
-            //    _context.Add(comment);
-            //    await _context.SaveChangesAsync();
-            //    return RedirectToAction(nameof(Index));
-            //}
-            //ViewData["ReviewId"] = new SelectList(_context.Reviews, "Id", "GameName", comment.ReviewId);
+            if (!ModelState.IsValid)
+            {
+                return Redirect($"~/Reviews/Details/{createCommentViewModel.Id}");
+            }
 
             await _commentService.CreateCommentAsync(createCommentViewModel.EmailAddress, createCommentViewModel.UserName, createCommentViewModel.CommentText, createCommentViewModel.Id);
 

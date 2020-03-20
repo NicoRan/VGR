@@ -38,8 +38,11 @@ namespace VGR.Services.Services
             return comment;
         }
 
-        
-
+        public async Task<ICollection<Comment>> GetCommentsByReviewId(Guid id)
+        {
+            var comments = await _dbContext.Comments.Where(c => c.ReviewId == id).ToListAsync();
+            return comments;
+        }
 
     }
 }

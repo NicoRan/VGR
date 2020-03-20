@@ -1,0 +1,33 @@
+﻿@model ICollection<CommentViewModel>
+<style>
+    header {
+    display:none
+    }
+    footer {
+    display:none
+    }
+</style>
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<table class="table table-bordered table-striped" border="1" style="border-color:black">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Contact</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.UserName</td>
+                <td>@item.CreatedOn</td>
+                <td>@item.CommentText</td>
+            </tr>
+        }
+    </tbody>
+</table>  

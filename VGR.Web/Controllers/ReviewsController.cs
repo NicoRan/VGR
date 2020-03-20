@@ -101,6 +101,10 @@ namespace VGR.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateReviewViewModel reviewViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(Create());
+            }
             //if (ModelState.IsValid)
             //{
             //    review.Id = Guid.NewGuid();
