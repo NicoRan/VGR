@@ -13,6 +13,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using VGR.Data.Context;
 using VGR.Models;
+using VGR.Services.Services;
+using VGR.Services.Contracts;
 
 namespace VGR.Web
 {
@@ -35,6 +37,11 @@ namespace VGR.Web
             services.AddDefaultIdentity<PowerUser>()
                 //(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<VGRDbContext>();
+
+            services.AddScoped<IPowerUserService, PowerUserService>();
+            services.AddScoped<IReviewService, ReviewService>();
+            services.AddScoped<ICommentService, CommentService>();
+
 
             services.AddControllersWithViews();
             services.AddRazorPages();

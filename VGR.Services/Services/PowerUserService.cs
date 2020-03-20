@@ -18,22 +18,29 @@ namespace VGR.Services.Services
             _dbContext = dbContext;
         }
 
-        public async Task<PowerUser> FindUserAsync(string email)
+        public async Task<PowerUser> FindUserAsync(Guid id)
         {
-            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Email == email);
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == id);
             return user;
         }
 
-        public async Task<PowerUser> CreateUserAsync(string email)
+        //public async Task<PowerUser> CreateUserAsync(string email)
+        //{
+        //    var user = await FindUserAsync(email);
+        //    if (user == null)
+        //    {
+        //        var newUser = new PowerUser { Email = email };
+        //        await _dbContext.Users.AddAsync(newUser);
+        //        await _dbContext.SaveChangesAsync();
+        //        return newUser;
+        //    }
+        //    return user;
+        //}
+
+        public async Task<PowerUser> GetPowerUserAsync(Guid poweruserId)
         {
-            var user = await FindUserAsync(email);
-            if (user == null)
-            {
-                var newUser = new PowerUser { Email = email };
-                await _dbContext.Users.AddAsync(newUser);
-                await _dbContext.SaveChangesAsync();
-                return newUser;
-            }
+            //todo powerUserId null check?
+            var user = await _dbContext.Users.FirstOrDefaultAsync(u => u.Id == poweruserId);
             return user;
         }
     }

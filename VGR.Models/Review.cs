@@ -29,13 +29,14 @@ namespace VGR.Models
         
         [Required]
         public string VideoReview { get; set; }
-        
-        public DateTime CreatedOn { get; set; }
+
+        public DateTime CreatedOn { get; set; } = DateTime.UtcNow;
 
         //public Guid PowerUserId { get; set; }
         public PowerUser PowerUser { get; set; }
 
         //public Guid CommentId { get; set; }
         public ICollection<Comment> Comments { get; set; }
+
     }
 }

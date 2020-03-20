@@ -5,11 +5,18 @@
     <UserSecretsId>aspnet-VGR.Web-314CD004-97AC-4DE1-9F41-A00534C981B6</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="Views\Comments\Create.cshtml" />
+  </ItemGroup>
+
+  
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.2" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
@@ -19,6 +26,7 @@
   <ItemGroup>
     <ProjectReference Include="..\VGR.Data\VGR.Data.csproj" />
     <ProjectReference Include="..\VGR.Models\VGR.Models.csproj" />
+    <ProjectReference Include="..\VGR.Services\VGR.Services.csproj" />
   </ItemGroup>
 
 </Project>
