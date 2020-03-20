@@ -9,6 +9,10 @@
     <Content Remove="Views\Comments\Create.cshtml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="NewFile.txt" />
+  </ItemGroup>
+
   
 
 

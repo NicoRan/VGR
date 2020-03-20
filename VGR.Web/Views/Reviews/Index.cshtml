@@ -4,19 +4,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h2>Game Reviews</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         @*@foreach (var item in Model)
             {*@
         <tr>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.ReviewText)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.GameName)
             </th>
@@ -26,9 +26,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.ReleaseYear)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.VideoReview)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.CreatedOn)
             </th>
@@ -40,9 +40,9 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.ReviewText)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.GameName)
                 </td>
@@ -52,16 +52,15 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.ReleaseYear)
                 </td>
-                <td>
+                @*<td>
                     @Html.DisplayFor(modelItem => item.VideoReview)
-                </td>
+                </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.CreatedOn)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    <a class="btn  btn-success" asp-controller="Comments" asp-action="PrintPDF" asp-route-id="@item.Id">PDF</a> </td>
+                   <td> <a class="btn  btn-success" asp-action="Details" asp-route-id="@item.Id">Details</a> 
                 </td>
             </tr>
         }

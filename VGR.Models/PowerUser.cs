@@ -8,15 +8,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace VGR.Models
 {
-    // Add profile data for application users by adding properties to the PowerUser class
     public class PowerUser : IdentityUser<Guid>
     {
-        public PowerUser()
-        {
-           // this.Reviews = new List<Review>();
-        }
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        //[Key]
         public ICollection<Review> Reviews { get; set; }
     }
 }

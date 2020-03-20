@@ -1,4 +1,18 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿
+$(document).ready(() => {
+    console.log('vatre');
+    $('#show-hide-comment').on('click', function (event) {
+        console.log(event);
+        let button = document.getElementById('show-hide-comment');
+        let divHolder = document.getElementById('comment-show');
+        console.log(divHolder);
+        if (divHolder.style.display === 'none') {
+            divHolder.style.display = "initial";
+            button.textContent = 'Cancel Comment';
+        }
+        else {
+            divHolder.style.display = "none";
+            button.textContent = 'Add Comment';
+        }
+    });
+});

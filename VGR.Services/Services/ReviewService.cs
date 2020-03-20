@@ -50,7 +50,9 @@ namespace VGR.Services.Services
 
         public async Task<Review> GetReviewAsync(Guid id)
         {
-            var review = await _dbContext.Reviews.FirstOrDefaultAsync(r => r.Id == id);
+            var review = await _dbContext.Reviews
+                .Include(r => r.Comments)
+                .FirstOrDefaultAsync(r => r.Id == id);
 
             return review;
         }

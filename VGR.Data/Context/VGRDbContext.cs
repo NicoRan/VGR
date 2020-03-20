@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VGR.Data.DataConfigurations;
+using VGR.Data.Seeder;
 using VGR.Models;
 
 namespace VGR.Data.Context
@@ -25,6 +26,8 @@ namespace VGR.Data.Context
             builder.ApplyConfiguration(new CommentConfiguration());
             builder.ApplyConfiguration(new ReviewConfiguration());
             builder.ApplyConfiguration(new PowerUserConfiguration());
+
+            builder.Seeder();
 
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
